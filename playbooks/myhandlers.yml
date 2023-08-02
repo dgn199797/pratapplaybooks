@@ -1,21 +1,21 @@
 ---
-- hosts: ubuntu
+- hosts: ubuntuos
   become: yes
-  tasks: 
-  - name: i want install webserver on ubuntuos
-    apt: 
+  tasks:
+  - name: i want to install webserver on ubuntuos
+    apt:
       name: apache2
       state: present
     notify: startwebserver
 
-  - name: i want copy index file into all nodes
-    template: 
+  - name: i want to copy index file into all nodes
+    template:
       src: myindex.j2
       dest: /var/www/html/index.html
     notify: startwebserver
 
-  handlers: 
+  handlers:
   - name: startwebserver
-    service: 
+    service:
       name: apache2
-      state: present
+      state: restarted
